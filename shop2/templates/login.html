@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/static/css/login.css">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="login-form">
+                <h2 class="text-center">Member Login</h2>
+                <form action="/login" method="post">
+                    <div class="avatar">
+                        <img src="/static/icon/noun_avatar_1639756.svg" alt="Avatar">
+                    </div>           
+                    <div class="form-group">
+                        <input type="text" class="form-control input-lg" name="username" placeholder="Username" required="required">	
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control input-lg" name="password" placeholder="Password" required="required">
+                    </div>
+                    <div class="form-group clearfix">
+                        <button type="submit" class="btn btn-primary btn-lg pull-right">로그인 하기</button>
+                    </div>		
+                </form>
+                <div class="hint-text">계정이 없으면 가입하시겠어요? <a href="/join">가입하러 가기</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
