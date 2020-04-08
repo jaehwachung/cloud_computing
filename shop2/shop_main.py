@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from waitress import serve
-from yourapplication.database import db_session
+from database import db_session
 
 app = Flask(__name__)
 
