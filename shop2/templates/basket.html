@@ -74,91 +74,121 @@
 <script src="https://use.fontawesome.com/c560c025cf.js"></script>
 <div class="container">
    <div class="card shopping-cart">
-            <div class="card-header bg-dark text-light">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                Shipping cart
-                <a href="" class="btn btn-outline-info btn-sm pull-right">Continiu shopping</a>
-                <div class="clearfix"></div>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="alert alert-success mt-3" role="alert"></div>
+            <ul class=flashes>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
             </div>
-            <div class="card-body">
-                    <!-- PRODUCT -->
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-2 text-center">
-                                <img class="img-responsive" src="http://placehold.it/120x80" alt="prewiew" width="120" height="80">
+            {% endif %}
+        {% endwith %}
+
+        <div class="card-header bg-dark text-light">
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            장바구니
+            <a href="/goods" class="btn btn-outline-info btn-sm pull-right">계속 쇼핑하기</a>
+            <div class="clearfix"></div>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                <input type="hidden" name="delete_goods_id" value="">
+                <!-- PRODUCT -->
+                {% for item in items %}
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-2 text-center">
+                            <img class="img-responsive" src="http://placehold.it/120x80" alt="prewiew" width="120" height="80">
+                    </div>
+                    <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                        <h4 class="product-name"><strong>{{ item.goods_item.goods_name }}</strong></h4>
+                        <h4>
+                            <small>{{ item.goods_item.goods_description }}</small>
+                        </h4>
+                    </div>
+                    <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+                        <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+                            <h6><strong>{{ item.goods_item.price }} <span class="text-muted">x</span></strong></h6>
                         </div>
-                        <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-                            <h4 class="product-name"><strong>Product Name</strong></h4>
-                            <h4>
-                                <small>Product description</small>
-                            </h4>
+                        <div class="col-4 col-sm-4 col-md-4">
+                            <input type="hidden" name="goods_id" value="{{ item.goods_item.id }}">
+                            <div class="quantity">
+                                <input type="button" value="+" class="plus" onclick="goods_quantity_adjuest('plus', this)">
+                                <input type="number" step="1" max="99" min="1" value="{{ item.goods_cnt }}" title="Qty" class="qty"
+                                        size="4" name="quantity">
+                                <input type="button" value="-" class="minus" onclick="goods_quantity_adjuest('minus', this)">
+                            </div>
                         </div>
-                        <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
-                            <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
-                                <h6><strong>25.00 <span class="text-muted">x</span></strong></h6>
-                            </div>
-                            <div class="col-4 col-sm-4 col-md-4">
-                                <div class="quantity">
-                                    <input type="button" value="+" class="plus">
-                                    <input type="number" step="1" max="99" min="1" value="1" title="Qty" class="qty"
-                                           size="4">
-                                    <input type="button" value="-" class="minus">
-                                </div>
-                            </div>
-                            <div class="col-2 col-sm-2 col-md-2 text-right">
-                                <button type="button" class="btn btn-outline-danger btn-xs">
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </button>
-                            </div>
+                        <div class="col-2 col-sm-2 col-md-2 text-right">
+                            <button type="button" class="btn btn-outline-danger btn-xs" onclick="basket_delete('{{ item.id }}')">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
                         </div>
                     </div>
-                    <hr>
-                    <!-- END PRODUCT -->
-                    <!-- PRODUCT -->
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-2 text-center">
-                                <img class="img-responsive" src="http://placehold.it/120x80" alt="prewiew" width="120" height="80">
-                        </div>
-                        <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
-                            <h4 class="product-name"><strong>Product Name</strong></h4>
-                            <h4>
-                                <small>Product description</small>
-                            </h4>
-                        </div>
-                        <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
-                            <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
-                                <h6><strong>25.00 <span class="text-muted">x</span></strong></h6>
-                            </div>
-                            <div class="col-4 col-sm-4 col-md-4">
-                                <div class="quantity">
-                                    <input type="button" value="+" class="plus">
-                                    <input type="number" step="1" max="99" min="1" value="1" title="Qty" class="qty"
-                                           size="4">
-                                    <input type="button" value="-" class="minus">
-                                </div>
-                            </div>
-                            <div class="col-2 col-sm-2 col-md-2 text-right">
-                                <button type="button" class="btn btn-outline-danger btn-xs">
-                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <hr>
-                    <!-- END PRODUCT -->
+                </div>
+                <hr>
+                {% endfor %}
+                <!-- END PRODUCT -->
+
                 <div class="pull-right">
-                    <a href="" class="btn btn-outline-secondary pull-right">
-                        Update shopping cart
+                    <a href="#" onclick="basket_update()" class="btn btn-outline-secondary pull-right">
+                        장바구니 업데이트
                     </a>
                 </div>
-            </div>
-            <div class="card-footer">
-                <div class="pull-right" style="margin: 10px">
-                    <a href="" class="btn btn-success pull-right">Checkout</a>
-                    <div class="pull-right" style="margin: 5px">
-                        Total price: <b>50.00€</b>
-                    </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="pull-right" style="margin: 10px">
+                <a href="#" onclick="payment()" class="btn btn-success pull-right">결제하기</a>
+                <div class="pull-right" style="margin: 5px">
+                    Total price: <b>{{ total_money }}</b>
                 </div>
             </div>
         </div>
+    </div>
 </div>
+<script>
+    var form = document.querySelector("form");
+    var isBasketUpdate = false;
+
+    function basket_update() {
+        form.action = "/basket/update";
+        form.submit()
+    }
+
+    function payment() {
+        if (isBasketUpdate) {
+            alert('장바구니를 업데이트해주세요');
+        } else {
+            form.action = "/order";
+            form.submit();
+        }
+    }
+    
+    function basket_delete(goods_id) {
+        if (confirm("장바구니에서 삭제하시겠습니까?")) {
+            form.action = "/basket/delete";
+            form.delete_goods_id.value = goods_id;
+            form.submit();
+        }
+    }
+    
+    function goods_quantity_adjuest(action, elem) {
+        isBasketUpdate = true;
+
+        if (action ===  'plus') {
+            var quantity_element = elem.nextElementSibling;
+            quantity_element.value = parseInt(quantity_element.value) + 1;
+        } else {
+            var quantity_element = elem.previousElementSibling;
+
+            if (quantity_element.value > 1) {
+                quantity_element.value = parseInt(quantity_element.value) - 1;
+            } else {
+                alert('최소 1개는 구매해야 합니다');
+            }
+        }
+    }
+</script>
 {% endblock %}
