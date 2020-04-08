@@ -12,6 +12,10 @@ def shop_run():
 def login_page():
     return render_template("login.html")
 
+@app.route("/login", methods=('post',))
+def login_proc():
+    return render_template("login.html")
+
 @app.route("/goods")
 def goods_page():
     return render_template("goods.html")
