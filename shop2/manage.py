@@ -65,7 +65,7 @@ def db_info(host, user, password, db):
         "user": user,
         "password": password,
         "database": db
-    }, open("database.json", "w"))
+    }, open("/opt/knou/shop2/database.json", "w"))
     
     click.echo("데이터베이스가 잘 생성되었습니다")
 

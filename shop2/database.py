@@ -7,7 +7,7 @@ from pathlib import Path
 json_base_path = Path(__file__).resolve().parent
 db_config_path = json.load(open(json_base_path / "database.json"))
 
-engine = create_engine('mssql+pyodbc://{user}:{password}@{host}}/{database}?driver=ODBC+Driver+17+for+SQL+Server'.format(**db_config_path), convert_unicode=True, echo=True)
+engine = create_engine('mssql+pyodbc://{user}:{password}@{host}/{database}?driver=ODBC+Driver+17+for+SQL+Server'.format(**db_config_path), convert_unicode=True, echo=True)
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
                                          bind=engine))
