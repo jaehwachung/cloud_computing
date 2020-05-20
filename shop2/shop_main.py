@@ -183,5 +183,5 @@ def shutdown_session(exception=None):
         db_session.commit()
 
 if __name__ == "__main__":
-    #serve(app, listen="*:5000") 
-    app.run(host="0.0.0.0", debug=True)
+    serve(app, listen="*:80") 
+    #app.run(host="0.0.0.0", debug=True)

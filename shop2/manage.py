@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import click
+import json
 from flask import Flask
 from flask.cli import FlaskGroup
 from models import ShopMember, Goods
@@ -52,6 +53,22 @@ def goods_insert():
         db_session.add(goods)
     
     db_session.commit()
+
+@cli.command()
+@click.option('--host', default="", help='DB Host')
+@click.option('--user', default="", help='DB User')
+@click.option('--password', default="", help='DB User Password')
+@click.option('--db', default="", help='DB Name')
+def db_info(host, user, password, db):
+    json.dump({
+        "host": host,
+        "user": user,
+        "password": password,
+        "database": db
+    }, open("database.json", "w"))
+    
+    click.echo("데이터베이스가 잘 생성되었습니다")
+
 
 if __name__ == '__main__':
     cli()
