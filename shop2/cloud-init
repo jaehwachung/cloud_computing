@@ -17,6 +17,7 @@ runcmd:
   - git clone https://github.com/search5/knou.git
   - cd /opt/knou/shop2
   - python3 manage.py db_info --host="<db_host>" --user="<db_user>" --password="<db_user_password>" --db="<db name>"
+  - python3 manage.py create_db
   - python3 manage.py user_create
   - python3 manage.py goods_insert
   - python3 shop_main.py

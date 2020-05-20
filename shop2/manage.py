@@ -16,6 +16,14 @@ def cli():
     """Management script for the Wiki application."""
 
 @cli.command()
+def create_db():
+    from database import init_db
+
+    init_db()
+
+    click.echo("DB 스키마가 생성되었습니다")
+
+@cli.command()
 def user_create():
     """User Create"""
     admin_user = ShopMember()
@@ -67,7 +75,7 @@ def db_info(host, user, password, db):
         "database": db
     }, open("/opt/knou/shop2/database.json", "w"))
     
-    click.echo("데이터베이스가 잘 생성되었습니다")
+    click.echo("데이터베이스 정보가 잘 생성되었습니다")
 
 
 if __name__ == '__main__':
