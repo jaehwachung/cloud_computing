@@ -1,0 +1,13 @@
+#cloud-config
+package_upgrade: true
+packages:
+  - python3
+  - python3-pip
+  - build-essential
+runcmd:
+  - python3 -m pip install flask waitress
+  - mkdir /opt
+  - cd /opt
+  - git clone https://github.com/search5/knou.git
+  - cd /opt/knou/shop1
+  - python3 shop_main.py
