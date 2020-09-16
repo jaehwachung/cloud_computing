@@ -28,7 +28,7 @@ def user_create():
     """User Create"""
     admin_user = ShopMember()
     admin_user.name = '관리자'
-    admin_user.email = 'admin@easymall.kr'
+    admin_user.email = 'admin@knou-mall.kr'
     admin_user.password = '1234'
     admin_user.is_admin = 'Y'
     admin_user.create_date = func.now()
