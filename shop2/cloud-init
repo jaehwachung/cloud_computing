@@ -12,9 +12,8 @@ runcmd:
   - apt update
   - ACCEPT_EULA=Y apt-get install -y msodbcsql17 mssql-tools
   - python3 -m pip install flask sqlalchemy waitress pyodbc
-  - mkdir /opt
   - cd /opt
-  - git clone https://github.com/search5/knou.git
+  - git clone https://github.com/jaehwachung/cloud_computing.git
   - cd /opt/knou/shop2
   - python3 manage.py db_info --host="<db_host>" --user="<db_user>" --password="<db_user_password>" --db="<db name>"
   - python3 manage.py create_db

@@ -6,8 +6,7 @@ packages:
   - build-essential
 runcmd:
   - python3 -m pip install flask waitress
-  - mkdir /opt
   - cd /opt
-  - git clone https://github.com/search5/knou.git
+  - git clone https://github.com/jaehwachung/cloud_computing.git
   - cd /opt/knou/shop1
   - python3 shop_main.py
