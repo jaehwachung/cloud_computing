@@ -14,7 +14,7 @@ runcmd:
   - python3 -m pip install flask sqlalchemy waitress pyodbc
   - cd /opt
   - git clone https://github.com/jaehwachung/cloud_computing.git
-  - cd /opt/knou/shop2
+  - cd /opt/cloud_computing/shop2
   - python3 manage.py db_info --host="<db_host>" --user="<db_user>" --password="<db_user_password>" --db="<db name>"
   - python3 manage.py create_db
   - python3 manage.py user_create
