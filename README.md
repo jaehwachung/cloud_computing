@@ -1,1 +1,1 @@
-# knou
+# KNOU Computer Science
