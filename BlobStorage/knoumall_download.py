@@ -7,7 +7,8 @@ try:
   connect_str = "<연결 문자열>"
   blob_service_client = BlobServiceClient.from_connection_ string(connect_str)
   container_name = "cloud-shop-cc"
-  local_file_name = "quickstart" + str(uuid.uuid4()) + ".txt" upload_file_path = local_file_name
+  local_file_name = "quickstart" + str(uuid.uuid4()) + ".txt" 
+  upload_file_path = local_file_name
   file = open(upload_file_path,'w')
   file.write("Hello, World!")
   file.close( )
