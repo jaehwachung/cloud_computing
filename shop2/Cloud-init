@@ -15,8 +15,8 @@ runcmd:
   - cd /opt
   - git clone https://github.com/jaehwachung/cloud_computing.git
   - cd /opt/cloud_computing/shop2
-  - python3 manage.py db_info --host="<db_host>" --user="<db_user>" --password="<db_user_password>" --db="<db name>"
-  - python3 manage.py create_db
-  - python3 manage.py user_create
-  - python3 manage.py goods_insert
+  - python3 manage.py db-info --host="<db_host>" --user="<db_user>" --password="<db_user_password>" --db="<db name>"
+  - python3 manage.py create-db
+  - python3 manage.py user-create
+  - python3 manage.py goods-insert
   - python3 shop_main.py
