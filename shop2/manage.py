@@ -6,6 +6,8 @@ from flask.cli import FlaskGroup
 from models import ShopMember, Goods
 from sqlalchemy import func
 from database import db_session
+from click.parser import split_arg_string
+from urllib.parse import quote
 
 def create_app():
     from shop_main import app
@@ -68,10 +70,11 @@ def goods_insert():
 @click.option('--password', default="", help='DB User Password')
 @click.option('--db', default="", help='DB Name')
 def db_info(host, user, password, db):
+    db_password = split_arg_string(password)
     json.dump({
         "host": host,
         "user": user,
-        "password": password,
+        "password": quote(db_password[0]) if db_password else "",
         "database": db
     }, open("/opt/cloud_computing/shop2/database.json", "w"))
     
