@@ -1,0 +1,2 @@
+recursive-include knou_shop2/templates *
+recursive-include knou_shop2/static *

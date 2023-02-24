@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request, flash, redirect, session
 from waitress import serve
-from database import db_session
+from knou_shop2.database import db_session
 import os
 import datetime
-from models import ShopMember, Goods, Basket, Orders, OrdersItem
+from knou_shop2.models import ShopMember, Goods, Basket, Orders, OrdersItem
 from sqlalchemy import func
 
 app = Flask(__name__)

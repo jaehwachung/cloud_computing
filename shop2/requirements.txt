@@ -1,4 +1,6 @@
 flask
 sqlalchemy
 waitress
-pyodbc
+psycopg
+azure-identity
+azure-keyvault-secrets

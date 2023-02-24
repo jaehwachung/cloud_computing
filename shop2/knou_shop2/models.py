@@ -1,17 +1,17 @@
-from sqlalchemy import Column, Integer, NVARCHAR, CHAR, DateTime, ForeignKey, NVARCHAR
+from sqlalchemy import Column, Integer, String, CHAR, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
-from database import Base
+from knou_shop2.database import Base
 
 class ShopMember(Base):
     __tablename__ = 'shop_member'
 
     id = Column(Integer, primary_key=True)
-    name = Column(NVARCHAR(50))
-    email = Column(NVARCHAR(200), unique=True)
-    password = Column(NVARCHAR(32))
-    post_code = Column(NVARCHAR(5))
-    address = Column(NVARCHAR(255))
-    detail_address = Column(NVARCHAR(255))
+    name = Column(String(50))
+    email = Column(String(200), unique=True)
+    password = Column(String(32))
+    post_code = Column(String(5))
+    address = Column(String(255))
+    detail_address = Column(String(255))
     is_admin = Column(CHAR(1))
     create_date = Column(DateTime)
 
@@ -19,18 +19,18 @@ class Goods(Base):
     __tablename__ = 'goods'
 
     id = Column(Integer, primary_key=True)
-    goods_name = Column(NVARCHAR(255))
+    goods_name = Column(String(255))
     price = Column(Integer)
-    goods_photo = Column(NVARCHAR(255))
+    goods_photo = Column(String(255))
     goods_cnt = Column(Integer)
     goods_ranking = Column(Integer)
-    goods_description = Column(NVARCHAR(None))
+    goods_description = Column(String(None))
 
 class Orders(Base):
     __tablename__ = 'orders'
 
     id = Column(Integer, primary_key=True)
-    order_str_id = Column(NVARCHAR(100))
+    order_str_id = Column(String(100))
     member = Column(Integer, ForeignKey('shop_member.id'))
     order_date = Column(DateTime)
 
@@ -49,8 +49,8 @@ class GoodsTracking(Base):
     order_id = Column(Integer, ForeignKey('orders.id'))
     delivery_start_date = Column(DateTime)
     delivery_end_date = Column(DateTime)
-    tracking_number = Column(NVARCHAR(50))
-    tracking_status = Column(NVARCHAR(30))
+    tracking_number = Column(String(50))
+    tracking_status = Column(String(30))
 
 class Basket(Base):
     __tablename__ = 'basket'
