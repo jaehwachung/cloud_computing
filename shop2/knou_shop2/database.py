@@ -3,23 +3,22 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from azure.keyvault.secrets import SecretClient
 from azure.identity import DefaultAzureCredential
-import json
 import os
 
-valut_host = os.environ.get("VALUT_HOST")
+VALUT_HOST = os.environ.get("VALUT_HOST")
+DB_HOST = os.environ.get("DB_HOST")
+DB_USER = os.environ.get("DB_USER")
+DB_NAME = os.environ.get("DB_NAME")
 
 credential = DefaultAzureCredential()
-client = SecretClient(vault_url=f"https://{valut_host}.vault.azure.net", credential=credential)
-
-json_path = "knou_shop2/database.json"
-db_config_path = json.load(open(json_path))
+client = SecretClient(vault_url=f"https://{VALUT_HOST}.vault.azure.net", credential=credential)
 
 url_object = URL.create(
     "postgresql+psycopg",
-    username=db_config_path['user'],
+    username=DB_USER,
     password=client.get_secret('pgpasswd'),
-    host=db_config_path['host'],
-    database=db_config_path['database'],
+    host=DB_HOST,
+    database=DB_NAME,
 )
 
 engine = create_engine(url_object, convert_unicode=True, echo=False)
@@ -33,5 +32,5 @@ def init_db():
     # import all modules here that might define models so that
     # they will be registered properly on the metadata.  Otherwise
     # you will have to import them first before calling init_db()
-    import models
+    import knou_shop2.models
     Base.metadata.create_all(bind=engine)

@@ -1,8 +1,22 @@
 #!/usr/bin/env python
-from knou_shop2.models import ShopMember, Goods
+import click
+from flask.cli import FlaskGroup
+from models import ShopMember, Goods
 from sqlalchemy import func
 from knou_shop2.database import db_session
 
+
+def create_app():
+    from knou_shop2.shop_main import app
+    return app
+
+
+@click.group(cls=FlaskGroup, create_app=create_app)
+def cli():
+    """Management script for the Wiki application."""
+
+
+@cli.command()
 def user_create():
     """User Create"""
     admin_user = ShopMember()
@@ -15,7 +29,7 @@ def user_create():
     db_session.add(admin_user)
     db_session.commit()
     
-
+@cli.command()
 def goods_insert():
     """Goods Insert"""
 
@@ -40,3 +54,7 @@ def goods_insert():
         db_session.add(goods)
     
     db_session.commit()
+
+
+if __name__ == '__main__':
+    cli()
