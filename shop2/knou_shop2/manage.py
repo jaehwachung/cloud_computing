@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import click
 from flask.cli import FlaskGroup
-from models import ShopMember, Goods
+from knou_shop2.models import ShopMember, Goods
 from sqlalchemy import func
 from knou_shop2.database import db_session
 
