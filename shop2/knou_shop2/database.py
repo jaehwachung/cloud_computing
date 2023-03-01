@@ -16,7 +16,7 @@ client = SecretClient(vault_url=f"https://{VALUT_HOST}.vault.azure.net", credent
 url_object = URL.create(
     "postgresql+psycopg",
     username=DB_USER,
-    password=client.get_secret('pgpasswd'),
+    password=client.get_secret('MALL-DB-PASSWORD'),
     host=DB_HOST,
     database=DB_NAME,
 )
