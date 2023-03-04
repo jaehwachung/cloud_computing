@@ -1,1 +1,1 @@
-# data analyzing with Azure ML
+# Data analyzing with Azure ML
