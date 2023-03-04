@@ -3,19 +3,18 @@ package_upgrade: true
 packages:
   - git
   - python3
+  - python3-pip
   - libpq-dev
   - build-essential
 write_files:
   - path: "/etc/environment"
     append: true
     content: |
-      export VALUT_HOST="<vault_host>"
       export DB_HOST="<db_host>"
       export DB_USER="<db_user>"
+      export DB_PASSWD="<db_user_password>"
       export DB_NAME="<db_name>"
 runcmd:
-  - curl https://bootstrap.pypa.io/get-pip.py | python3
-  - python3 -m pip install --upgrade setuptools wheel
   - python3 -m pip install https://github.com/jaehwachung/cloud_computing/releases/download/v0.2/knou_cloud_computing_shop2-0.2-py3-none-any.whl
   - create-db
   - shop_manage user-create

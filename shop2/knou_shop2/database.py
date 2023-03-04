@@ -1,25 +1,19 @@
 from sqlalchemy import create_engine, URL
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-from azure.keyvault.secrets import SecretClient
-from azure.identity import DefaultAzureCredential
 import os
 
 VALUT_HOST = os.environ.get("VALUT_HOST")
 DB_HOST = os.environ.get("DB_HOST")
 DB_USER = os.environ.get("DB_USER")
+DB_PASSWD = os.environ.get("DB_PASSWD")
 DB_NAME = os.environ.get("DB_NAME")
 
-credential = DefaultAzureCredential()
-client = SecretClient(vault_url=f"https://{VALUT_HOST}.vault.azure.net", credential=credential)
-
-url_object = URL.create(
-    "postgresql+psycopg",
+url_object = URL.create("postgresql+psycopg",
     username=DB_USER,
-    password=client.get_secret('MALL-DB-PASSWORD'),
+    password=DB_PASSWD,
     host=DB_HOST,
-    database=DB_NAME,
-)
+    database=DB_NAME)
 
 engine = create_engine(url_object, convert_unicode=True, echo=False)
 db_session = scoped_session(sessionmaker(autocommit=False,
