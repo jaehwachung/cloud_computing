@@ -13,8 +13,7 @@ url_object = URL.create("postgresql+psycopg",
     username=DB_USER,
     password=DB_PASSWD,
     host=DB_HOST,
-    database=DB_NAME,
-    sslmode="require")
+    database=DB_NAME)
 
 engine = create_engine(url_object, echo=False)
 db_session = scoped_session(sessionmaker(autocommit=False,
