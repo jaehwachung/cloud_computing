@@ -7,16 +7,16 @@ packages:
   - libpq-dev
   - build-essential
 write_files:
-  - path: "/etc/environment"
+  - path: "/opt/shop2.yml"
     append: true
     content: |
-      export DB_HOST="<db_host>"
-      export DB_USER="<db_user>"
-      export DB_PASSWD="<db_user_password>"
-      export DB_NAME="<db_name>"
+      DB_HOST: <db_host>
+      DB_USER: <db_user>
+      DB_PASSWD: <db_user_password>
+      DB_NAME: <db_name>
 runcmd:
-  - python3 -m pip install https://github.com/jaehwachung/cloud_computing/releases/download/v0.2/knou_cloud_computing_shop2-0.2-py3-none-any.whl
+  - python3 -m pip install https://github.com/jaehwachung/cloud_computing/releases/download/latest/knou_cloud_computing_shop2-latest-py3-none-any.whl
   - create-db
   - shop_manage user-create
   - shop_manage goods-insert
-  - waitress-serve knou_shop2.shop_main:app
+  - waitress-serve --port 80 knou_shop2.shop_main:app

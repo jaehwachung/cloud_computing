@@ -1,13 +1,14 @@
 from sqlalchemy import create_engine, URL
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-import os
+from yaml import load, Loader
 
-VALUT_HOST = os.environ.get("VALUT_HOST")
-DB_HOST = os.environ.get("DB_HOST")
-DB_USER = os.environ.get("DB_USER")
-DB_PASSWD = os.environ.get("DB_PASSWD")
-DB_NAME = os.environ.get("DB_NAME")
+application_settings = load(open("/opt/shop2.yml"), Loader)
+
+DB_HOST = application_settings.get("DB_HOST")
+DB_USER = application_settings.get("DB_USER")
+DB_PASSWD = application_settings.get("DB_PASSWD")
+DB_NAME = application_settings.get("DB_NAME")
 
 url_object = URL.create("postgresql+psycopg",
     username=DB_USER,
@@ -15,7 +16,7 @@ url_object = URL.create("postgresql+psycopg",
     host=DB_HOST,
     database=DB_NAME)
 
-engine = create_engine(url_object, echo=False)
+engine = create_engine(url_object, connect_args=dict(sslmode="require"), echo=False)
 db_session = scoped_session(sessionmaker(autocommit=False,
                                         autoflush=False,
                                         bind=engine))
