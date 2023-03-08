@@ -10,7 +10,7 @@ CREATE TABLE shop_member (
 	create_date TIMESTAMP NULL, 
 	PRIMARY KEY (id), 
 	UNIQUE (email)
-)
+);
 
 CREATE TABLE goods (
 	id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY, 
@@ -19,9 +19,9 @@ CREATE TABLE goods (
 	goods_photo VARCHAR(255) NULL, 
 	goods_cnt INTEGER NULL, 
 	goods_ranking INTEGER NULL, 
-	goods_description VARCHAR(max) NULL, 
+	goods_description TEXT NULL, 
 	PRIMARY KEY (id)
-)
+);
 
 CREATE TABLE orders (
 	id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY, 
@@ -30,16 +30,16 @@ CREATE TABLE orders (
 	order_date TIMESTAMP NULL, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(member) REFERENCES shop_member (id)
-)
+);
 
 CREATE TABLE orders_item (
 	id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY, 
 	goods INTEGER NULL, 
 	goods_price INTEGER NULL, 
 	goods_cnt INTEGER NULL, 
-	PRIMARY KEY (id), 
+	PRIMARY KEY (id),
 	FOREIGN KEY(goods) REFERENCES goods (id)
-)
+);
 
 CREATE TABLE basket (
 	id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY, 
@@ -49,7 +49,7 @@ CREATE TABLE basket (
 	PRIMARY KEY (id), 
 	FOREIGN KEY(member) REFERENCES shop_member (id), 
 	FOREIGN KEY(goods) REFERENCES goods (id)
-)
+);
 
 CREATE TABLE goods_tracking (
 	id INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY, 
@@ -60,4 +60,4 @@ CREATE TABLE goods_tracking (
 	tracking_status VARCHAR(30) NULL, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(order_id) REFERENCES orders (id)
-)
+);
