@@ -9,7 +9,7 @@ try:
 
   local_file_name = "main_carousel.png" 
 
-  blob_client = blob_service_client.get_blob_client(container="mall-blob-container", blob=local_file_name)
+  blob_client = blob_service_client.get_blob_client(container=container_name, blob=local_file_name)
   input_stream = io.BytesIO(os.urandom(15))
   blob_client.upload_blob(input_stream, blob_type="BlockBlob")
         
