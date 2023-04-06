@@ -9,10 +9,10 @@ try:
 
   local_file_name = "main_carousel.png" 
 
-  blob_client = blob_service_client.get_blob_client(container=container_name, blob=local_file_name)
-  input_stream = io.BytesIO(os.urandom(15))
-  blob_client.upload_blob(input_stream, blob_type="BlockBlob")
-        
+  container_client = blob_service_client.get_container_client(container=container_name)
+  with open(file=os.path.join('', local_file_name), mode="rb") as data:
+    blob_client = container_client.upload_blob(name=local_file_name, data=data, overwrite=True)
+  
   print("\nUploading to Azure Storage as blob:\n\t" + local_file_name)
 
 except Exception as ex: 
