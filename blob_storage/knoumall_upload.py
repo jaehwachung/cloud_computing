@@ -10,11 +10,11 @@ try:
   local_file_name = "main_carousel.png" 
 
   container_client = blob_service_client.get_container_client(container=container_name)
+
+  print("\nUploading to Azure Storage as blob:\n\t" + local_file_name)
   with open(file=os.path.join('', local_file_name), mode="rb") as data:
     blob_client = container_client.upload_blob(name=local_file_name, data=data, overwrite=True)
   
-  print("\nUploading to Azure Storage as blob:\n\t" + local_file_name)
-
 except Exception as ex: 
   print('Exception:') 
   print(ex)
