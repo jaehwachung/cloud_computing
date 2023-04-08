@@ -1,4 +1,4 @@
-import os, uuid
+import os
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
 
 try:
@@ -11,7 +11,7 @@ try:
 
   blob_client = blob_service_client.get_blob_client(container=container_name, blob=remote_file_name)
 
-  print("\nDelete blob \n\t" + remote_file_name)
+  print("\nDeleting blob \n\t" + remote_file_name)
   blob_client.delete_blob()
 
   except Exception as ex: 
