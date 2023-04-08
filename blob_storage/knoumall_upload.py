@@ -1,4 +1,4 @@
-import os, io
+import os
 from azure.storage.blob import BlobServiceClient
 
 try:
