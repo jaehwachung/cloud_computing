@@ -1,5 +1,5 @@
 import os
-from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient
+from azure.storage.blob import BlobServiceClient
 
 try:
   print("한국방송통신대학교 4학년 2학기 클라우드 컴퓨팅")
