@@ -11,7 +11,7 @@ try:
 
   blob_client = blob_service_client.get_blob_client(container=container_name, blob=remote_file_name)
 
-  print("\nDeleting blob from Azure Storage: \n\t" + remote_file_name)
+  print("\nDeleting a blob from Azure Storage: \n\t" + remote_file_name)
   blob_client.delete_blob()
 
   except Exception as ex: 
