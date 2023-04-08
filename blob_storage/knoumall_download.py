@@ -12,7 +12,7 @@ try:
 
   blob_client = blob_service_client.get_blob_client(container=container_name, blob=remote_file_name)
 
-  print("\nDownload blob \n\t" + remote_file_name)
+  print("\nDownloading blob from Azure Storage:\n\t" + remote_file_name)
 
   with open(file=os.path.join('', local_file_name), mode="wb") as download_blob:
         download_stream = blob_client.download_blob()
