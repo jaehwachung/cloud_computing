@@ -1,0 +1,3 @@
+## Function App
+
+sendmail server
