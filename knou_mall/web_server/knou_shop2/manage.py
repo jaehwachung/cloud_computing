@@ -1,29 +1,20 @@
 #!/usr/bin/env python
 import click
-import json
-from flask import Flask
 from flask.cli import FlaskGroup
-from models import ShopMember, Goods
+from knou_shop2.models import ShopMember, Goods
 from sqlalchemy import func
-from database import db_session
-from click.parser import split_arg_string
-from urllib.parse import quote
+from knou_shop2.database import db_session
+
 
 def create_app():
-    from shop_main import app
+    from knou_shop2.shop_main import app
     return app
+
 
 @click.group(cls=FlaskGroup, create_app=create_app)
 def cli():
     """Management script for the Wiki application."""
 
-@cli.command()
-def create_db():
-    from database import init_db
-
-    init_db()
-
-    click.echo("DB 스키마가 생성되었습니다")
 
 @cli.command()
 def user_create():
@@ -63,22 +54,6 @@ def goods_insert():
         db_session.add(goods)
     
     db_session.commit()
-
-@cli.command()
-@click.option('--host', default="", help='DB Host')
-@click.option('--user', default="", help='DB User')
-@click.option('--password', default="", help='DB User Password')
-@click.option('--db', default="", help='DB Name')
-def db_info(host, user, password, db):
-    db_password = split_arg_string(password)
-    json.dump({
-        "host": host,
-        "user": user,
-        "password": quote(db_password[0]) if db_password else "",
-        "database": db
-    }, open("/opt/cloud_computing/shop2/database.json", "w"))
-    
-    click.echo("데이터베이스 정보가 잘 생성되었습니다")
 
 
 if __name__ == '__main__':
