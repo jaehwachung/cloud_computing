@@ -5,6 +5,7 @@ import os
 import datetime
 from knou_shop2.models import ShopMember, Goods, Basket, Orders, OrdersItem
 from sqlalchemy import func
+from sqlalchemy.orm.exc import UnmappedInstanceError
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(30)
@@ -85,7 +86,7 @@ def basket_update():
     req_quantity = request.form.getlist('quantity')
 
     for goods_id, quantity in zip(req_goods_ids, req_quantity):
-        basket_item = db_session.query(Basket).filter(Basket.goods == goods_id, Basket.member == session["uid"]).first()
+        basket_item = db_session.query(Basket).filter(Basket.goods == int(goods_id), Basket.member == session["uid"]).first()
         basket_item.goods_cnt = quantity
 
         db_session.add(basket_item)
@@ -126,8 +127,11 @@ def goods_order():
 def basket_delete():
     goods_id = request.form.get("delete_goods_id")
     
-    basket_item = db_session.query(Basket).filter(Basket.goods == goods_id).first()
-    db_session.delete(basket_item)
+    try:
+        basket_item = db_session.query(Basket).filter(Basket.goods == int(goods_id)).first()    
+        db_session.delete(basket_item)
+    except UnmappedInstanceError as e:
+        pass
 
     db_session.commit()
     
@@ -159,7 +163,7 @@ def member_join():
     return redirect("/")
 
 
-@app.route("/goods/<goods_id>")
+@app.route("/goods/<int:goods_id>")
 def goods_view(goods_id):
     # 상품 가져오기
     item = db_session.query(Goods).filter(Goods.id == goods_id).first()
