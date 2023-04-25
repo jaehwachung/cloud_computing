@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, NVARCHAR, CHAR, DateTime, ForeignKey, NVARCHAR
 from sqlalchemy.orm import relationship
 from database import Base
-
+###
 class ShopMember(Base):
     __tablename__ = 'shop_member'
 
