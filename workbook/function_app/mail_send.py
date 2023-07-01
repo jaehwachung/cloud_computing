@@ -19,7 +19,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
 
     if mail_title:
         smtp = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-        smtp.login('<me>@knou.ac.kr', '발급비밀번호')
+        smtp.login('<me>@knou.ac.kr', '<발급비밀번호>')
         msg = MIMEText(mail_title)
         msg['Subject'] = Header('클라우드 컴퓨팅 메일 보내기 예제입니다', 'utf-8')
         smtp.sendmail('<me>@knou.ac.kr', '<to>', msg.as_string())
