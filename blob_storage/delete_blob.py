@@ -14,6 +14,6 @@ try:
   print("\nDeleting a blob from Azure Storage: \n\t" + remote_file_name)
   blob_client.delete_blob()
 
-  except Exception as ex: 
-    print('Exception:') 
-    print(ex)
+except Exception as ex: 
+  print('Exception:') 
+  print(ex)
