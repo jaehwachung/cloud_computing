@@ -10,7 +10,7 @@ DB_USER = application_settings.get("DB_USER")
 DB_PASSWD = application_settings.get("DB_PASSWD")
 DB_NAME = application_settings.get("DB_NAME")
 
-url_object = URL.create("postgresql+psycopg",
+url_object = URL.create("postgresql+pg8000",
     username=DB_USER,
     password=DB_PASSWD,
     host=DB_HOST,
