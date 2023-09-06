@@ -16,7 +16,7 @@ url_object = URL.create("postgresql+psycopg",
     host=DB_HOST,
     database=DB_NAME)
 
-engine = create_engine(url_object, connect_args=dict(sslmode="require"), echo=False)
+engine = create_engine(url_object, echo=False)
 db_session = scoped_session(sessionmaker(autocommit=False,
                                         autoflush=False,
                                         bind=engine))
