@@ -1,0 +1,6 @@
+pclass, survived, gender, age, sibsp, parch, embarked
+1, , female, 25, 0, 0, s
+1, , male, 30, 0, 0, q
+1, , female, 44, 5, 3, s
+3, , male, 30, 0, 0, s
+3, , male, 30, 1, 1, s
